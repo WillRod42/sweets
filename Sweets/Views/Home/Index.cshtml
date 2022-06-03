@@ -1,0 +1,12 @@
+@{
+  Layout = "_Layout";
+}
+
+@using Sweets.Models
+@using System.Security.Claims
+
+<h1>Sweets</h1>
+<hr />
+<p>@Html.ActionLink("Treats", "Index", "Treat", null, new { @class = "btn btn-primary" })</p>
+<p>@Html.ActionLink("Flavors", "Index", "Flavor", null, new { @class = "btn btn-primary" })</p>
+<p>@Html.ActionLink("Register/Login", "Index", "Account", null, new { @class = "btn btn-success" })</p>
