@@ -1,0 +1,37 @@
+@{
+  Layout = "_Layout";
+}
+
+@using Sweets.Models
+@model Sweets.Models.Treat
+
+<h1>Treat Info</h1>
+<hr />
+<h5>@Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)</h5>
+
+<h5>Flavors</h5>
+<ul>
+  @if (Model.JoinEntities.Count == 0)
+  {
+    <li>No Flavors added</li>
+  }
+  else
+  {
+    @foreach (var join in Model.JoinEntities)
+    {
+      <li>
+        @Html.ActionLink(join.Flavor.Name, "Details", "Flavor", new { id = join.Flavor.FlavorId })
+        @using (Html.BeginForm("DeleteFlavor", "Treat"))
+        {
+          @Html.Hidden("joinId", @join.TreatFlavorId)
+          <input type="submit" value="Remove"/>
+        }
+      </li>
+    }
+  }
+</ul>
+
+<p>@Html.ActionLink("Add a Flavor", "AddFlavor", "Treat", new { id = Model.TreatId }, new { @class = "btn btn-primary" })</p>
+<p>@Html.ActionLink("Edit Treat", "Edit", new { id = Model.TreatId }, new { @class = "btn btn-primary" })</p>
+<p>@Html.ActionLink("Delete Treat", "Delete", new { id = Model.TreatId }, new { @class = "btn btn-danger" })</p>
+<p>@Html.ActionLink("Treat List", "Index", "Treat", null, new { @class = "btn btn-primary" })</p>
