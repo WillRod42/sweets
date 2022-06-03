@@ -1,0 +1,16 @@
+@{
+  Layout = "_Layout";
+}
+
+@model Sweets.Models.Flavor
+
+<h1>New Flavor</h1>
+
+@using (Html.BeginForm())
+{
+  @Html.LabelFor(model => model.Name)
+  @Html.TextBoxFor(model => model.Name)
+  <input type="submit" value="New Flavor" />
+}
+
+<p>@Html.ActionLink("Back", "Index", "Flavor", null, new { @class="btn btn-primary" })</p>
