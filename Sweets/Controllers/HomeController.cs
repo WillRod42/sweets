@@ -19,6 +19,8 @@ namespace Sweets.Controllers
     [HttpGet("/")]
     public ActionResult Index()
     {
+      ViewBag.Flavors = _db.Flavors.ToList();
+      ViewBag.Treats = _db.Treats.ToList();
       return View();
     }
   }
