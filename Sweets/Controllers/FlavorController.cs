@@ -3,19 +3,27 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using System.Threading.Tasks;
+using System.Security.Claims;
 using Sweets.Models;
 
 namespace Sweets.Controllers
 {
+  [Authorize]
 	public class FlavorController : Controller
 	{
 		private readonly SweetsContext _db;
+    private readonly UserManager<ApplicationUser> _userManager;
 
-    public FlavorController(SweetsContext db)
+    public FlavorController(UserManager<ApplicationUser> userManager, SweetsContext db)
     {
+      _userManager = userManager;
       _db = db;
     }
 
+    [AllowAnonymous]
     public ActionResult Index()
     {
       return View(_db.Flavors.ToList());
@@ -34,6 +42,7 @@ namespace Sweets.Controllers
       return RedirectToAction("Index");
     }
 
+    [AllowAnonymous]
 		public ActionResult Details(int id)
     {
       var thisFlavor = _db.Flavors
