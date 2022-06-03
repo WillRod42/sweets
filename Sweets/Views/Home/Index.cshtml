@@ -7,6 +7,37 @@
 
 <h1>Sweets</h1>
 <hr />
+
+<h2>Treats</h2>
+@if (ViewBag.Treats.Count == 0)
+{
+	<h3>No Treats Added Yet</h3>
+}
+else
+{
+  <ul>
+    @foreach (Treat treat in ViewBag.Treats)
+    {
+      <li>@Html.ActionLink($"{treat.Name}", "Details", "Treat", new { id = treat.TreatId })</li>
+    }
+  </ul>
+}
 <p>@Html.ActionLink("Treats", "Index", "Treat", null, new { @class = "btn btn-primary" })</p>
+
+<h2>Flavors</h2>
+@if (ViewBag.Flavors.Count == 0)
+{
+	<h3>No Flavors Added Yet</h3>
+}
+else
+{
+  <ul>
+    @foreach (Flavor flavor in ViewBag.Flavors)
+    {
+      <li>@Html.ActionLink($"{flavor.Name}", "Details", "Flavor", new { id = flavor.FlavorId })</li>
+    }
+  </ul>
+}
 <p>@Html.ActionLink("Flavors", "Index", "Flavor", null, new { @class = "btn btn-primary" })</p>
+
 <p>@Html.ActionLink("Register/Login", "Index", "Account", null, new { @class = "btn btn-success" })</p>
